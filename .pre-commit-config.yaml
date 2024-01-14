@@ -7,12 +7,11 @@ repos:
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: 'https://github.com/psf/black'
-    rev: 23.12.1
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.13
     hooks:
-      - id: black
-        args: [--target-version=py311]
-  - repo: 'https://github.com/pycqa/flake8'
-    rev: 7.0.0
-    hooks:
-      - id: flake8
+      # linter
+      - id: ruff
+        args: [ --fix ]
+      # formatter
+      - id: ruff-format
