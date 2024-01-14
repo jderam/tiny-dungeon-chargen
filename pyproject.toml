@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=69.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tiny_dungeon"
+description = "Character Generator for the Tiny Dungeon RPG (1st Edition)"
+readme = "README.md"
+authors = [{name = "Jeremy Deram"}]
+urls = {homepage = "https://github.com/jderam/tiny-dungeon-chargen"}
+license = {file = "LICENSE"}
+keywords = [
+    "Dungeons",
+    "Dragons",
+    "Tiny Dungeon",
+    "RPG",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dynamic = [
+    "version",
+]
+requires-python = ">=3.8"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "pre-commit",
+    "pytest",
+    "twine",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "tiny_dungeon.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["tiny_dungeon"]
+exclude = ["tests"]
+
+[tool.black]
+line-length = 88
+target-version = ["py39", "py310", "py311"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=tiny_dungeon"
+testpaths = ["tests"]
+markers = [
+    "repeat: repeats a test n times",
+]
