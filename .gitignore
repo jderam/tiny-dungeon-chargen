@@ -1,4 +1,6 @@
 .coverage
+dist/
 *.pyc
+*__pycache__*
 .python-version
 tiny_dungeon.egg-info
