@@ -1,6 +1,69 @@
-import random
+ADVENTURERS_KIT = [
+    "bedroll",
+    "flint and steel",
+    "belt pouch",
+    "rucksack",
+    "lantern",
+    "empty waterskin",
+    "oil (3 pints)",
+    "50' rope",
+    "rations (7 days)",
+    "torch",
+    "cloak",
+]
 
-traits = {
+RACES = {
+    "Human": {
+        "hp": 6,
+        # Humans get a random trait from the standard trait list
+        "trait": None,
+        "trait_desc": None,
+    },
+    "Fey": {
+        "hp": 6,
+        "trait": "Bow Mastery",
+        "trait_desc": "You have Mastered bows and have Advantage when using them. This is in addition to the Mastered weapon chosen at Adventurer Creation.",
+    },
+    "Dwarf": {
+        "hp": 8,
+        "trait": "Dark Vision",
+        "trait_desc": "You are able to see 30 feet around you in total darkness.",
+    },
+    "Goblin": {
+        "hp": 4,
+        "trait": "Goblin Agility",
+        "trait_desc": "You can Test 1d6 whenever you are successfully hit by an enemy. If your Test is successful, you evade the attack and do not take damage. Declaring Evade as an Action has no additional benefit.",
+    },
+    "Salimar": {
+        "hp": 5,
+        "trait": "Pyrothermic Healing",
+        "trait_desc": "Any amount damage that would be dealt to you by a source of fire instead heals you for that amount.",
+    },
+}
+
+# This item is not included in the rules, but I added it for convenience
+SAMPLE_WEAPONS = {
+    "Light Melee": [
+        "Club",
+        "Dagger",
+        "Mace",
+        "Sword",
+    ],
+    "Heavy Melee": [
+        "Battle Axe",
+        "Glaive",
+        "Two-handed Sword",
+        "War Hammer",
+    ],
+    "Ranged": [
+        "Bow",
+        "Crossbow",
+        "Sling",
+        "Throwing Knives",
+    ],
+}
+
+TRAITS = {
     "Acrobat": "You gain Advantage when Testing to do acrobatic tricks such as tumbling, long-distance jumps, climbing, and maintaining balance.",
     "Alchemist": "Provided the right reagents and recipes, you can mix potions, elixirs, and poisons. You also gain Advantage when identifying unknown liquids.",
     "Beastspeaker": "You are able to communicate with animals. This form of communication is primitive and very simplistic",
@@ -33,101 +96,8 @@ traits = {
     "Vigilant": "You gain Advantage on Initiative Tests.",
 }
 
-
-def random_trait():
-    return random.choice(list(traits.keys()))
-
-
-races = {
-    "Human": {
-        "hp": 6,
-        "trait": random_trait(),
-        "trait_desc": "",
-    },
-    "Fey": {
-        "hp": 6,
-        "trait": "Bow Mastery",
-        "trait_desc": "You have Mastered bows and have Advantage when using them. This is in addition to the Mastered weapon chosen at Adventurer Creation.",
-    },
-    "Dwarf": {
-        "hp": 8,
-        "trait": "Dark Vision",
-        "trait_desc": "You are able to see 30 feet around you in total darkness.",
-    },
-    "Goblin": {
-        "hp": 4,
-        "trait": "Goblin Agility",
-        "trait_desc": "You can Test 1d6 whenever you are successfully hit by an enemy. If your Test is successful, you evade the attack and do not take damage. Declaring Evade as an Action has no additional benefit.",
-    },
-    "Salimar": {
-        "hp": 5,
-        "trait": "Pyrothermic Healing",
-        "trait_desc": "Any amount damage that would be dealt to you by a source of fire instead heals you for that amount.",
-    },
-}
-
-
-adventurers_kit = [
-    "bedroll",
-    "flint and steel",
-    "belt pouch",
-    "rucksack",
-    "lantern",
-    "empty waterskin",
-    "oil (3 pints)",
-    "50' rope",
-    "rations (7 days)",
-    "torch",
-    "cloak",
+WEAPON_GROUPS = [
+    "Light Melee",
+    "Heavy Melee",
+    "Ranged",
 ]
-
-
-def random_race():
-    return random.choice(list(races.keys()))
-
-
-class TinyDungeonPC:
-
-    def __init__(self):
-        self.race = random_race()
-        self.hp = races[self.race]["hp"]
-        self.race_trait = races[self.race]["trait"]
-        if self.race == "Human":
-            self.race_trait_desc = traits[self.race_trait]
-        else:
-            self.race_trait_desc = races[self.race]['trait_desc']
-        traits_filtered = [x for x in traits if x != self.race_trait]
-        self.trait1, self.trait2, self.trait3 = random.sample(traits_filtered, 3)
-        self.equipment = adventurers_kit
-
-    def print_tdpc(self):
-        print()
-        print()
-        print(f"Name: _________________________________")
-        print()
-        print(f"Race: {self.race}")
-        print()
-        print(f"Hit Points: {self.hp}")
-        print()
-        print(f"Weapon Proficiency (circle one):   Light Melee   Heavy Melee   Ranged")
-        print()
-        print(f"Mastered Weapon: ______________________")
-        print()
-        print(f"TRAITS")
-        print(f"------------")
-        print(f"{self.race_trait}: {self.race_trait_desc}")
-        print(f"{self.trait1}: {traits[self.trait1]}")
-        print(f"{self.trait2}: {traits[self.trait2]}")
-        print(f"{self.trait3}: {traits[self.trait3]}")
-        print()
-        print(f"EQUIPMENT")
-        print(f"------------")
-        for item in adventurers_kit:
-            print(item)
-        print()
-
-
-if __name__ == "__main__":
-    my_pc = TinyDungeonPC()
-    my_pc.print_tdpc()
-
